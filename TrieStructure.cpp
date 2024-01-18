@@ -3,7 +3,7 @@ using namespace std;
 
 struct Node
 {
-    int *link[26];
+    Node *link[26];
     bool flag = false;
 
     bool containKey(char ch)
@@ -23,6 +23,11 @@ struct Node
     bool setEnd()
     {
         flag = true;
+    }
+
+    bool isEnd()
+    {
+        return flag;
     }
 };
 
@@ -47,15 +52,45 @@ public:
         {
             if(!temp->containKey(word[i]))
             {
-                link[word[i] - 'a'] = 1;
-                temp->put(word[i], new Node());
-
+                temp->put(word[i], new Node()); 
             }
             // move to the next reference trie.
             temp->next(word[i]);
 
         }
         temp->setEnd();
+    }
+
+    // Return true if the word is in the Trie
+    bool search(string word)
+    {
+        Node* temp = root;
+
+        for(int i=0;i<word.length();i++)
+        {
+            if(!temp->containKey(word[i]))
+            {
+                return false;
+            }
+            temp = temp->next(word[i]);
+        }
+        return temp->isEnd();
+    }
+
+    // Return true if the prefix is in the Trie
+    bool startWith(string prefix)
+    {
+        Node* temp = root;
+
+        for(int i=0;i<prefix.length();i++)
+        {
+            if(!temp->containKey(prefix[i]))
+            {
+                return false;
+            }
+            temp = temp->next(prefix[i]);
+        }
+        return true;
     }
     
     
