@@ -20,7 +20,7 @@ struct Node
         return link[ch - 'a'];
     }
 
-    bool setEnd()
+    void setEnd()
     {
         flag = true;
     }
@@ -50,24 +50,27 @@ public:
         Node *temp = root;
         for(int i=0;i<word.length();i++)
         {
+            //cout<<temp->containKey(word[i]);
             if(!temp->containKey(word[i]))
             {
                 temp->put(word[i], new Node()); 
             }
             // move to the next reference trie.
-            temp->next(word[i]);
+            temp = temp->next(word[i]);
 
         }
+        cout<<word<<"   inserted into Trie"<<endl;
         temp->setEnd();
     }
 
     // Return true if the word is in the Trie
-    bool search(string word)
+    bool word_search(string word)
     {
         Node* temp = root;
-
+        cout<<"Searching "<<word<<"  in Trie"<<endl;
         for(int i=0;i<word.length();i++)
         {
+            
             if(!temp->containKey(word[i]))
             {
                 return false;
@@ -95,5 +98,19 @@ public:
     
     
 };
+
+int main()
+{
+    string s[] = {"apple","apps"};
+
+    Trie T ;
+    for(int i=0;i<2;i++)
+    {
+        T.insert(s[i]);
+    }
+    cout<<T.startWith("apps");
+    //cout<<T.word_search("app");
+
+}
 
 
