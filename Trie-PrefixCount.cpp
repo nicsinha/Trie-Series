@@ -58,7 +58,7 @@ public:
         Node* temp = root;
 
         for (int i = 0; i < word.length(); i++)
-        {
+        { 
             if(!temp->containKey(word[i]))
             {
                 Node *n = new Node();
@@ -87,6 +87,24 @@ public:
         return temp->getSC();
     }
 
+    int countWordEqualTo(string word)
+    {
+        Node* temp = root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(temp->containKey(word[i]))
+            {
+                temp = temp->next(word[i]);
+            }
+            else {
+                return 0;
+            }
+        }
+        return temp->getEW();
+
+    }
+
+
     
 };
 int main()
@@ -98,8 +116,9 @@ int main()
     {
         T.insert(s[i]);
     }
-    cout<<T.countPrefix("apple");
-    
+    //cout<<T.countPrefix("apple");
+
+    cout<<T.countWordEqualTo("apps");
 
 }
 
