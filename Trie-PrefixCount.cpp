@@ -37,8 +37,6 @@ struct Node
         return EW;
     }
 
-    
-
     Node* next(char ch) {
         return links[ch-'a'];
     }
@@ -50,6 +48,10 @@ class Trie
 private:
     Node *root;
 public:
+
+    Trie() {
+        root = new Node();
+    }
 
     void insert(string word)
     {
@@ -66,7 +68,6 @@ public:
             temp->increaseSC(); 
         }
         temp->increaseEW();
-        temp->increaseSC();
     }
 
     int countPrefix(string word)
@@ -86,24 +87,21 @@ public:
         return temp->getSC();
     }
 
-    int countWordEndingWith(string word)
-    {
-        Node* temp = root;
-        for(int i=0;i<word.length();i++)
-        {
-            if(temp->containKey(word[i]))
-            {
-                temp = temp->next(word[i]);
-            }
-            else {
-                return 0;
-            }
-        }
-        return temp->getEW();
-
-    }
     
 };
+int main()
+{
+    string s[] = {"apple","apple","apps"};
+
+    Trie T ;
+    for(int i=0;i<3;i++)
+    {
+        T.insert(s[i]);
+    }
+    cout<<T.countPrefix("apple");
+    
+
+}
 
 
 
