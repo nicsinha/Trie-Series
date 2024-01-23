@@ -79,5 +79,30 @@ class Trie {
         }
         return true;
     }
-
+    
 };
+
+string completeString(int n,vector<string> &a)
+{
+    string ans = "";
+    Trie trie;
+
+    for(auto &it:a){
+        trie.insert(it);
+    }
+
+    for(auto &it:a) {
+
+        if(trie.checkIfPrefixExist(it)) {
+
+            if(it.length() > ans.length()) {
+                ans = it;
+            }
+            else if(it.length() == ans.length() && it<ans) {
+
+                ans = it;
+            }
+
+        }
+    }
+}
