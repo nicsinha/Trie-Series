@@ -23,6 +23,10 @@ class Node {
     {
         flag = true;
     }
+    bool getEnd()
+    {
+        return flag;
+    }
 
 };
 
@@ -55,5 +59,25 @@ class Trie {
         temp->setEnd();
     }
 
+    bool checkIfPrefixExist(string word) 
+    {
+        bool ans = true;
+        Node* temp = root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(temp->containKey(word[i]))
+            {
+                temp = temp->next(word[i]);
+                if(!temp->getEnd())
+                {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
 
 };
