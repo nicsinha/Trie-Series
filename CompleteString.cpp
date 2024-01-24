@@ -61,7 +61,6 @@ class Trie {
 
     bool checkIfPrefixExist(string word) 
     {
-        bool ans = true;
         Node* temp = root;
         for(int i=0;i<word.length();i++)
         {
@@ -82,7 +81,9 @@ class Trie {
     
 };
 
-string completeString(int n,vector<string> &a)
+//Complete is a longest string whose all prefix are present in a vector.
+
+string completeString(vector<string> &a)
 {
     string ans = "";
     Trie trie;
@@ -105,4 +106,10 @@ string completeString(int n,vector<string> &a)
 
         }
     }
+    return ans;
+}
+int main()
+{
+    vector<string> a = {"n","ninja","ni","nin","ni","nig"};
+    cout<<completeString(a);
 }
