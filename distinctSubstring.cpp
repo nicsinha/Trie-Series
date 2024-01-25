@@ -1,6 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+// Input = "abab"
+
+// output - {},a,ab,aba,abab,b,ba,bab
+
 struct Node
 {
     Node* links[26];
