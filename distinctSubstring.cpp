@@ -4,7 +4,7 @@ using namespace std;
 
 // Input = "abab"
 
-// output - {},a,ab,aba,abab,b,ba,bab
+// output - {},a,ab,aba,abab,b,ba,bab = 8
 
 struct Node
 {
@@ -29,7 +29,7 @@ class Trie
 {
     Node* root;
 
-    int subString = 0;
+    int subString = 1;
 
     public:
 
@@ -39,16 +39,19 @@ class Trie
 
     void insert(string word) {
 
-        Node *temp = root;
-
         for(int i=0;i<word.length();i++)
         {
-            if(!temp->containKey(word[i])) {
+            Node *temp = root;
+            for(int j=i;j<word.length();j++)
+            {
+                if(!temp->containKey(word[i])) {
 
-                temp->put(word[i],new Node());
-                subString += 1;
+                    temp->put(word[i],new Node());
+                    subString += 1;
+                }
+                temp = temp->next(word[i]);
             }
-            temp = temp->next(word[i]);
+
             
         }
         cout<<word<<"   inserted into Trie"<<endl;
@@ -64,18 +67,8 @@ int main()
     string s = "abab";
 
     Trie trie;
-
-    for(int i=0;i<s.length();i++)
-    {
-        string sub = "";
-        for(int j=i;j<s.length();j++)
-        {
-           sub = sub+s[j];
-        }
-        cout<<sub<<endl;
-        trie.insert(sub);
-    }
-    cout<<trie.countString()+1;
+    trie.insert(s);
+    cout<<trie.countString();
 
     return 0;
 }
