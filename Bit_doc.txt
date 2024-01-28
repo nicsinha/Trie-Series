@@ -1,0 +1,17 @@
+Right Shift Operator >>
+Left Shift Operator <<
+
+For integer we have 32 bits.
+
+a >> b = a/2^b
+
+Let say int is 8 bits. then 5 would be written as. 5 >> 2
+
+0 0 0 0 0 1 0 1 - Remove 2 bit from last in simple.
+
+0 0 0 0 0 0 0 1 - answer is 1.
+
+Q - How to find the the 3rd bit of a number - 5.
+
+Create a mask - (1<<i) -> 0 0 0 0 0 1 0 0 
+ans then do and - bit = 5 & (1<<i)
